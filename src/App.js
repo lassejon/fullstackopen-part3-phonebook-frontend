@@ -65,7 +65,7 @@ const App = () => {
 
       return
     }
-
+    person.id = people.length + 1
     peopleService
       .create(person)
       .then(returnPerson => {
