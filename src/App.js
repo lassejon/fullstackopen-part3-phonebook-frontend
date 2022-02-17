@@ -56,7 +56,7 @@ const App = () => {
           })
           .catch(error => {
             console.log(error);
-            setMessage(`${person.name} has already been removed from server`)
+            setMessage(`${person.name} could not be updated`)
             setTimeout(() => {
               setMessage(null)
             }, 5000)
@@ -74,7 +74,7 @@ const App = () => {
         const updatedPeople = people.concat(person);
         setPeople(updatedPeople)
         setShowPeople(updatedPeople)
-        setMessage(`${returnPerson.name} was created and added`)
+        setMessage(`${person.name} was created and added`)
         setTimeout(() => {
           setMessage(null)
         }, 5000)
