@@ -56,7 +56,7 @@ const App = () => {
           })
           .catch(error => {
             console.log(error);
-            setMessage(`${person.name} could not be updated`)
+            setMessage(error.response.data.error)
             setTimeout(() => {
               setMessage(null)
             }, 5000)
@@ -65,7 +65,7 @@ const App = () => {
 
       return
     }
-    person.id = people.length + 1
+
     peopleService
       .create(person)
       .then(returnPerson => {
@@ -80,8 +80,8 @@ const App = () => {
         }, 5000)
       })
       .catch(error => {
-        console.log(error);
-        setMessage("dasd", `${person.name} has already been removed from server`)
+        console.log(error.response.data.error);
+        setMessage(error.response.data.error)
         setTimeout(() => {
           setMessage(null)
         }, 5000)

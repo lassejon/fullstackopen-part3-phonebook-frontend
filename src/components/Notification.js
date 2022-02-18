@@ -37,6 +37,10 @@ const Notification = ({ message }) => {
     messageStyle = deleteStyle
   }
 
+  if (message.toLowerCase().includes('fail')) {
+    messageStyle = deleteStyle
+  }
+
   if (message.toLowerCase().includes('update')) {
     messageStyle = putStyle
   }
