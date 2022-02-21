@@ -18,7 +18,6 @@ const App = () => {
     peopleService
       .getAll()
       .then(initialPeople => {
-        console.log(initialPeople);
         setPeople(initialPeople)
         setShowPeople(initialPeople)
       })
@@ -36,17 +35,20 @@ const App = () => {
     }
 
     const samePerson = 
-      people.find(p => p.name.toLowerCase() === newName.toLocaleLowerCase())
+      showPeople.find(p => p.name.toLowerCase() === newName.toLocaleLowerCase());
 
     if (samePerson !== undefined) {
       person.id = samePerson.id
-      person.name = samePerson.name
+      person.name = samePerson.name;
+
 
       if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
-        peopleService
+          return peopleService
           .update(person)
           .then(returnedPerson => {
-            const updatedPeople = people.map(p => p.id !== person.id ? p : returnedPerson)
+            const updatedPeople = people.map(p => p.id !== person.id ? p : returnedPerson);
+            setNewNumber('');
+            setNewName('');
             setPeople(updatedPeople)
             setShowPeople(updatedPeople)
             setMessage(`${returnedPerson.name} was updated`)
@@ -61,9 +63,7 @@ const App = () => {
               setMessage(null)
             }, 5000)
           })
-      } 
-
-      return
+      }
     }
 
     peopleService
@@ -71,7 +71,7 @@ const App = () => {
       .then(returnPerson => {
         setNewNumber('');
         setNewName('');
-        const updatedPeople = people.concat(person);
+        const updatedPeople = people.concat(returnPerson);
         setPeople(updatedPeople)
         setShowPeople(updatedPeople)
         setMessage(`${person.name} was created and added`)
